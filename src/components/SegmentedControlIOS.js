@@ -13,11 +13,11 @@ const TabContainer = styled.div`
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
 `
 const animateBg = keyframes`
-  from {
-    background: initial;
+  0% {
+    background: #FDD;
     color: ${props => props.theme.main};
   }
-  to {
+  100% {
     background: ${props => props.theme.main};
     color: '#fff';
   }
@@ -34,27 +34,31 @@ const Tab = styled.div`
   color: ${props => props.selected ? '#fff': props.theme.main};
   background: ${props => props.selected? props.theme.main: 'initial'};
   border-right: ${props => props.selected? '0': '1px solid ' + props.theme.main};
-  animation: ${props => props.selected? animateBg: ''} .3s linear;
-  -webkit-tab-highligh-color: rgba(0,0,0,0);
+  animation-name: ${props => props.selected? animateBg: 'initial'};
+  animation-duration: .2s;
+  animation-timing-function: linear;
+  -webkit-tap-highlight-color: rgba(255,221,221,.3); 
   -webkit-user-select: none;
   &:first-child {
     border-radius: 3px 0 0 3px;
-    border-left: 0;
   }
   &:last-child {
     border-radius: 0 3px 3px 0;
     border-right: 0;
   }
+  &:active {
+    background: ${props => props.selected? props.theme.main: '#FDD'};
+  }
 `
 
-const SegmentedControlIOS = ({values, selectedIndex=0, onValueChange}) => (
+const SegmentedControlIOS = ({values, selectedIndex=0, onValueChange, enabled=true}) => (
   <TabContainer>
     {
       values.map((value, index) => (
         <Tab
           key={index}
           selected={selectedIndex === index}
-          onClick={() => onValueChange(value)}
+          onClick={(enabled)? () => onValueChange(value): null}
         >
           {value}
         </Tab>

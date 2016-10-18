@@ -4,7 +4,7 @@ import SegmentedControlIOS from './components/SegmentedControlIOS'
 
 
 const theme = {
-  main: '#FF3B30',
+  main: '#FF3B30'
 }
 
 class App extends Component {
