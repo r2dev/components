@@ -12,11 +12,13 @@ class App extends Component {
     index: 0
   }
   render() {
+    const values = ['My Library', 'My Collection', 'My Store']
     return (
       <ThemeProvider theme={theme}>
         <SegmentedControlIOS
-          values={['My Library', 'My Collection', 'My Store']}
+          values={values}
           selectedIndex={this.state.index}
+          onValueChange={(value) => this.setState({index: values.indexOf(value)})}
         />
       </ThemeProvider>
     );
